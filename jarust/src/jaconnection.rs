@@ -51,7 +51,7 @@ pub struct JaConnection {
 impl JaConnection {
     pub(crate) async fn open(config: JaConfig, transport: impl Transport) -> JaResult<Self> {
         let (router, root_channel) = JaRouter::new(&config.namespace).await;
-        let transaction_manager = TransactionManager::new(BUFFER_SIZE);
+        let transaction_manager = TransactionManager::new(config.cap);
 
         let (transport_protocol, receiver) =
             TransportProtocol::connect(transport, &config.uri).await?;

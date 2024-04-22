@@ -15,7 +15,7 @@ async fn main() -> anyhow::Result<()> {
         .init();
     let timeout = std::time::Duration::from_secs(10);
 
-    let config = JaConfig::builder().url("ws://localhost:8188/ws").build();
+    let config = JaConfig::builder().url("ws://localhost:8188/ws").cap(32).build();
     let mut connection = jarust::connect(config, TransportType::Ws).await?;
     let session = connection.create(10).await?;
     let (handle, mut event_receiver) = session.attach_audio_bridge().await?;
@@ -31,7 +31,7 @@ async fn main() -> anyhow::Result<()> {
         .await?;
     tracing::info!("Created Room {}, permanent: {}", room, permanent);
 
-    let _ = handle
+    handle
         .join_room(
             room,
             AudioBridgeJoinOptions {

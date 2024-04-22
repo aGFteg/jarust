@@ -16,6 +16,7 @@ async fn main() -> anyhow::Result<()> {
 
     let config = JaConfig::builder()
         .url("wss://janus.conf.meetecho.com/ws")
+        .cap(32)
         .build();
     let mut connection = jarust::connect(config, TransportType::Ws).await?;
 

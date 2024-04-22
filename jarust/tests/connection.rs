@@ -14,6 +14,7 @@ use jarust::transport::trans::Transport;
 async fn test_connection() {
     let config = JaConfig::builder()
         .url("mock://some.janus.com")
+        .cap(10)
         .namespace("mock")
         .build();
     let transport = MockTransport::create_transport();
@@ -25,6 +26,7 @@ async fn test_connection() {
 async fn test_session_creation_success() {
     let config = JaConfig::builder()
         .url("mock://some.janus.com")
+        .cap(10)
         .namespace("mock")
         .build();
     let mut transport = MockTransport::create_transport();
@@ -55,6 +57,7 @@ async fn test_session_creation_success() {
 async fn test_session_creation_failure() {
     let config = JaConfig::builder()
         .url("mock://some.janus.com")
+        .cap(10)
         .namespace("mock")
         .build();
     let mut transport = MockTransport::create_transport();

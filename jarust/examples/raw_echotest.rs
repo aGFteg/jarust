@@ -9,7 +9,7 @@ async fn main() -> anyhow::Result<()> {
     tracing_subscriber::fmt()
         .with_env_filter(EnvFilter::from_default_env().add_directive("jarust=trace".parse()?))
         .init();
-    let config = JaConfig::builder().url("ws://localhost:8188/ws").build();
+    let config = JaConfig::builder().url("ws://localhost:8188/ws").cap(32).build();
     let mut connection = jarust::connect(config, TransportType::Ws).await?;
     let session = connection.create(10).await?;
     let (handle, mut event_receiver) = session.attach("janus.plugin.echotest").await?;

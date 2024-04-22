@@ -109,7 +109,7 @@ impl WebsocketTransport {
         #[cfg(feature = "use-native-tls")]
         {
             let (stream, ..) = connect_async_with_config(request, None, false).await?;
-            return Ok(stream);
+            Ok(stream)
         }
     }
 }
